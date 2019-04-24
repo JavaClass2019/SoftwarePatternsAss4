@@ -3,7 +3,7 @@
 // it refers to functions that trigger changes to the store
 // actions can contain normal code but must return an object
 // this object contains the type of action and any data it delivers
-// please refer to https://redux.js.org/basics/actions
+// please refer to this https://redux.js.org/basics/actions
 
 // axios is a library that allows us to make asynchronous requests
 // in this case it is being used to make async HTTP requests
