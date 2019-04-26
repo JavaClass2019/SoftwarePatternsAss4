@@ -1,5 +1,3 @@
-// please refer to https://reactjs.org/docs/components-and-props.html
-
 import React from "react";
 // reactstrap components
 import {
@@ -59,7 +57,7 @@ class AddManufacturer extends React.Component {
   async addManufacturer () {
     if (this.inputIsValid()) {
       try {
-        const response = await axios.post(`http://localhost:3001/manufacturers`, this.state.manufacturer)
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/manufacturers`, this.state.manufacturer)
         if (response.status === 201) this.props.history.push('/products')
         else this.toggleErrorAlert('An internal server error occured.')
       } catch (e) {

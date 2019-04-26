@@ -35,7 +35,7 @@ class Products extends React.Component {
 
   async fetchProducts () {
     try {
-      const products = await axios.get('http://localhost:3001/products')
+      const products = await axios.get(`${process.env.REACT_APP_API_URL}/products`)
       return products.data
     } catch (e) {
       console.log(e.message)

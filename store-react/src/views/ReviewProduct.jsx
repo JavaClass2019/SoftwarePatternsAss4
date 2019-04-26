@@ -69,7 +69,7 @@ class ReviewProduct extends React.Component {
     if (this.inputIsValid()) {
       try {
         const response = await axios.post(
-          `http://localhost:3001/products/${this.props.location.data.product_id}/reviews`,
+          `${process.env.REACT_APP_API_URL}/products/${this.props.location.data.product_id}/reviews`,
           {
             body: this.state.review.body,
             rating: parseInt(document.getElementById('slider').noUiSlider.get()),

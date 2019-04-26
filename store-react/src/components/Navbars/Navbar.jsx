@@ -85,7 +85,7 @@ class PagesNavbar extends React.Component {
       >
         <Container>
           <div className="navbar-translate">
-            <NavbarBrand data-placement="bottom" to="/" rel="noopener noreferrer" tag={Link}>
+            <NavbarBrand data-placement="bottom" rel="noopener noreferrer">
               <span>Store API </span>
             </NavbarBrand>
             <button
@@ -125,35 +125,40 @@ class PagesNavbar extends React.Component {
             </div>
             <Nav navbar>
               <NavItem>
-                <NavLink tag={Link} to="/products">
+                <NavLink tag={Link} to={ this.props.user.role.name === 'Administrator' ? "/admin-products" : "/products" }>
                   Products
                 </NavLink>
               </NavItem>
-              <NavItem>
+              { this.props.user.role.name === 'Customer' && (<NavItem>
                 <NavLink tag={Link} to="/cart">
                   Cart ({ this.props.numberOfItemsInCart })
                 </NavLink>
-              </NavItem>
-              <NavItem>
+              </NavItem>)}
+              { this.props.user.role.name === 'Customer' && (<NavItem>
                 <NavLink tag={Link} to="/purchases">
                   Purchases
                 </NavLink>
-              </NavItem>
-              <NavItem>
+              </NavItem>)}
+              { this.props.user.role.name === 'Administrator' && (<NavItem>
                 <NavLink tag={Link} to="/add-product">
                   + Product
                 </NavLink>
-              </NavItem>
-              <NavItem>
+              </NavItem>)}
+              { this.props.user.role.name === 'Administrator' && (<NavItem>
                 <NavLink tag={Link} to="/add-manufacturer">
                   + Manufacturer
                 </NavLink>
-              </NavItem>
-              <NavItem>
+              </NavItem>)}
+              { this.props.user.role.name === 'Administrator' && (<NavItem>
                 <NavLink tag={Link} to="/add-category">
                   + Category
                 </NavLink>
-              </NavItem>
+              </NavItem>)}
+              { this.props.user.role.name === 'Administrator' && (<NavItem>
+                <NavLink tag={Link} to="/add-user">
+                  + User
+                </NavLink>
+              </NavItem>)}
               <NavItem>
                 <NavLink onClick={ this.logout }>
                   Logout
@@ -168,7 +173,7 @@ class PagesNavbar extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { numberOfItemsInCart: state.cart.length }
+  return { numberOfItemsInCart: state.cart.length, user: state.user }
 }
 
 const mapDispatchToProps = dispatch  => {

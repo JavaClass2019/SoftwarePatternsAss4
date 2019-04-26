@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
-  skip_before_action :authorize_request, only: [:index, :create]
+  skip_before_action :authorize_request, only: [:index, :create, :show, :destroy]
   before_action :set_product, only: [:show, :update, :destroy]
 
   # GET /products
   def index
-    @products = Product.order(created_at: :desc)
+    @products = Product.where(is_available: true).order(created_at: :desc)
 
     render json: @products
   end
@@ -37,7 +37,9 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1
   def destroy
-    @product.destroy
+    @product.is_available = false
+    @product.save
+    render nothing: true, status: :no_content
   end
 
   private
@@ -48,6 +50,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.require(:product).permit(:name, :price, :manufacturer_id, :category_id, :user_id)
+      params.require(:product).permit(:name, :price, :manufacturer_id, :is_available, :img_url, :category_id, :user_id)
     end
 end

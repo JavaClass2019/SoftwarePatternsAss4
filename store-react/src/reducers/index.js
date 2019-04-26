@@ -1,10 +1,3 @@
-// this file contains reducers
-// reducers determines how the store will change when actions are triggered
-// they receive the object an action returns and use the type to determine what todo
-// please refer to https://redux.js.org/basics/reducers
-
-
-// this object will be used to create the initial state of the store
 const initialState = {
   user: {},
   cart: []

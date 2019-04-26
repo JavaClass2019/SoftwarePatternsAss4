@@ -61,7 +61,9 @@ class Login extends React.Component {
         const response = await this.login({ email: this.state.email, password: this.state.password })
         if (response.status === 200) {
           this.props.setCurrentUser(response.data)
-          this.props.history.push('/products')
+
+          if (response.data.role.name === 'Administrator') this.props.history.push('/admin-products')
+          else this.props.history.push('/products')
         } else this.toggleErrorAlert('An internal server error occured.')
       } catch (e) {
         console.error(e.message)
@@ -73,7 +75,7 @@ class Login extends React.Component {
   }
 
   async login (params = {}) {
-    return await axios.post('http://localhost:3001/users/login', params)
+    return await axios.post(`${process.env.REACT_APP_API_URL}/users/login`, params)
   }
 
   toggleErrorAlert = (message) => {

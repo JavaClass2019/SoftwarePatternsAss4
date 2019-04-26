@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize_request, only: [:create, :add_customer]
+  skip_before_action :authorize_request, only: [:create, :add_customer, :add_admin]
   before_action :set_user, only: [:show, :update, :destroy]
 
   CUSTOMER_ROLE_NAME = 'Customer'
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   # POST /users/admin
   def add_admin
     @user = User.new(user_params)
-    @user.role_id = Role.find_by_name(ADMIN_ROLE_NAME)
+    @user.role_id = Role.find_by_name(ADMIN_ROLE_NAME).id
 
     if @user.save
       render json: @user.attributes.merge!({ token: AuthenticateUser.new(@user.email, @user.password).call }), status: :created, location: @user

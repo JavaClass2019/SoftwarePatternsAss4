@@ -1,10 +1,4 @@
-// please refer to https://reactjs.org/docs/components-and-props.html
-
 import React from "react";
-
-// import the connect curried function
-// it allows us to connect to the store
-// and declaratively choose what data and methods we wish for access to
 import { connect } from 'react-redux'
 // reactstrap components
 import {
@@ -77,7 +71,7 @@ class AddProduct extends React.Component {
 
   async fetchManufacturers () {
     try {
-      const manufacturers = await axios.get('http://localhost:3001/manufacturers')
+      const manufacturers = await axios.get(`${process.env.REACT_APP_API_URL}/manufacturers`)
       return manufacturers.data
     } catch (e) {
       console.error(e.message)
@@ -87,7 +81,7 @@ class AddProduct extends React.Component {
 
   async fetchCategories () {
     try {
-      const categories = await axios.get('http://localhost:3001/categories')
+      const categories = await axios.get(`${process.env.REACT_APP_API_URL}/categories`)
       return categories.data
     } catch (e) {
       console.error(e.message)
@@ -98,8 +92,8 @@ class AddProduct extends React.Component {
   async addProduct () {
     if (this.inputIsValid()) {
       try {
-        const response = await axios.post(`http://localhost:3001/users/${this.props.userId}/products`, this.state.product)
-        if (response.status === 201) this.props.history.push('/products')
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/users/${this.props.userId}/products`, this.state.product)
+        if (response.status === 201) this.props.history.push('/admin-products')
         else this.toggleErrorAlert('An internal server error occured.')
       } catch (e) {
         console.error(e.message)
@@ -263,10 +257,6 @@ class AddProduct extends React.Component {
   }
 }
 
-// we pass this function to connect
-// connect passes it the application state
-// it chooses userId only
-// the store then makes only userId visible to the component
 const mapStateToProps = state => {
   return { userId: state.user.id }
 }

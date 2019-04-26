@@ -69,7 +69,7 @@ class LoginNavbar extends React.Component {
       >
         <Container>
           <div className="navbar-translate">
-            <NavbarBrand data-placement="bottom" to="/" rel="noopener noreferrer" tag={Link}>
+            <NavbarBrand data-placement="bottom" rel="noopener noreferrer">
               <span>Store API </span>
             </NavbarBrand>
             <button

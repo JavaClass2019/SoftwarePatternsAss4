@@ -48,7 +48,6 @@ class Register extends React.Component {
 
   async componentWillMount () {
     this.setState({
-      roles: await this.fetchRoles(),
       paymentMethods: await this.fetchPaymentMethods()
     })
   }
@@ -68,19 +67,9 @@ class Register extends React.Component {
     this.setState({ user: Object.assign(user, data) })
   }
 
-  async fetchRoles () {
-    try {
-      const roles = await axios.get('http://localhost:3001/roles')
-      return roles.data
-    } catch (e) {
-      console.error(e.message)
-    }
-    return []
-  }
-
   async fetchPaymentMethods () {
     try {
-      const paymentMethods = await axios.get('http://localhost:3001/payment_methods')
+      const paymentMethods = await axios.get(`${process.env.REACT_APP_API_URL}/payment_methods`)
       return paymentMethods.data
     } catch (e) {
       console.log(e.message)
@@ -91,7 +80,7 @@ class Register extends React.Component {
   async register () {
     if (this.inputIsValid()) {
       try {
-        const response = await axios.post('http://localhost:3001/users/customer', this.state.user)
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/users/customer`, this.state.user)
         if (response.status === 201) this.props.history.push('/login')
         else this.toggleErrorAlert('An internal server error occured.')
       } catch (e) {

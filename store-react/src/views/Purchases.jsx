@@ -34,7 +34,7 @@ class Purchases extends React.Component {
 
   async fetchPurchases () {
     try {
-      const products = await axios.get(`http://localhost:3001/users/${this.props.userId}/purchases`)
+      const products = await axios.get(`${process.env.REACT_APP_API_URL}/users/${this.props.userId}/purchases`)
       return products.data
     } catch (e) {
       console.log(e.message)
@@ -51,9 +51,9 @@ class Purchases extends React.Component {
             <div className="page-header-image" />
             <div className="content">
               <Container>
-                <Row style={{zIndex: 9000}}>
+                <Row>
                   { this.state.purchases.map(
-                      (purchase) => (<Purchase name={purchase.product.name} price={purchase.product.price} date={purchase.created_at} key={ purchase.id } />)
+                      (purchase) => (<Purchase name={purchase.product.name} img={ purchase.product.img_url } price={purchase.product.price} date={purchase.created_at} key={ purchase.id } />)
                     )
                   }
                 </Row>
