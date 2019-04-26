@@ -11,7 +11,7 @@ class Product extends React.Component {
       <Col lg="4">
         <div className="info">
           <div>
-            <img style={{ width: "100%", height: "300px" }} src={this.props.img} />
+            <img style={{ width: "100%", height: "300px" }} alt="product_image" src={this.props.img} />
           </div>
           <h4 className="info-title">{this.props.name}</h4>
           <hr className="line-primary" />
@@ -24,6 +24,16 @@ class Product extends React.Component {
           >
             <Button className="btn-simple" color="primary" size="sm">
               <i className="tim-icons icon-book-bookmark" /> View
+            </Button>
+          </NavLink>
+          <NavLink
+            to={{
+              pathname: "/edit-product",
+              data: { productId: this.props.id }
+            }}
+          >
+            <Button className="btn-simple" color="primary" size="sm">
+              <i className="tim-icons icon-book-bookmark" /> Edit
             </Button>
           </NavLink>
           <Button

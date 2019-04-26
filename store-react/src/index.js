@@ -16,9 +16,10 @@ import Cart from "./views/Cart.jsx";
 import AddProduct from "./views/AddProduct.jsx"
 import Purchases from "./views/Purchases.jsx";
 import AddManufacturer from "./views/AddManufacturer.jsx";
-import AddCategory from "./views/AddCategory.jsx"
-import ReviewProduct from "./views/ReviewProduct.jsx"
-import ViewProduct from "./views/Admin/ViewProduct.jsx"
+import AddCategory from "./views/AddCategory.jsx";
+import ReviewProduct from "./views/ReviewProduct.jsx";
+import ViewProduct from "./views/Admin/ViewProduct.jsx";
+import EditProduct from "./views/Admin/EditProduct.jsx";
 
 import store from "./store/index";
 
@@ -40,6 +41,7 @@ ReactDOM.render(
         <Route path="/add-category" render={props => <AddCategory {...props} />} />
         <Route path="/review-product" render={props => <ReviewProduct {...props} />} />
         <Route path="/view-product" render={props => <ViewProduct {...props} />} />
+        <Route path="/edit-product" render={props => <EditProduct {...props} />} />
         <Redirect from="/" to="/login" />
       </Switch>
     </BrowserRouter>
